@@ -1,0 +1,33 @@
+name: 印成PDF
+
+on: [push]
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: 把稿子取过来
+        uses: actions/checkout@v5
+
+      - name: 装印书工具和中文书法字体
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pandoc weasyprint fonts-noto-cjk
+
+      - name: 合成一本 PDF
+        run: |
+          mkdir -p dist
+          printf 'body{font-family:"Noto Sans CJK SC",sans-serif;line-height:1.8}h1{page-break-before:always}\n' > style.css
+          pandoc book/*.md -s --toc --pdf-engine=weasyprint --css=style.css -o dist/book.pdf
+
+      - name: 发布到 Releases
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v1.0.${{ github.run_number }}
+          name: 我的书 第${{ github.run_number }}版
+          files: dist/book.pdf
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

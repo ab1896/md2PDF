@@ -1,5 +1,5 @@
 # md2PDF
-写好一份md稿子，再让一个"机器人"帮你把它印成 PDF。流程是：写 .md 稿子 → 存到 GitHub → 机器人印成 PDF → 下载。
+写好一份md稿子，多个md文件合成一个PDF文件，再让一个"机器人"帮你把它印成 PDF。流程是：写 .md 稿子 → 存到 GitHub → 机器人印成 PDF → 下载。
 
 <img width="1920" height="970" alt="image" src="https://github.com/user-attachments/assets/f6b22f79-df10-4d88-88c1-c7cf18284694" />
 
